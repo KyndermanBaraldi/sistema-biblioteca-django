@@ -1,0 +1,59 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'global/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'livro/css/style.css' %}">
+    
+    {% block 'head' %}
+    {% endblock %}
+    
+    <title>
+        {% block 'titulo' %}
+        {% endblock%}
+    </title>
+
+</head>
+<body>
+
+    <header>
+
+        <nav>
+            <div class="logo">Biblioteca com DJANGO</div>
+    
+            <div class="links">
+    
+                <ul class="nav-item">
+                    <li><a href="{% url 'inicio' %}">Início</a></li>
+                    <li><a href="{% url 'buscar' %}">Livros</a></li>
+                    <li><a href="">Histórico</a></li>
+                    <li><a href="">Emprestar</a></li>
+                    <li><a href="">Estoque</a></li>
+                </ul>
+                    
+            </div>
+            
+            {% if usuario %}
+                <div>
+                    <span>Olá, {{ usuario.nome }}</span>
+                    <a class="login" href="{% url 'sair' %}">Sair</a>
+                </div>
+            {% else %}
+                <div>
+                    <a class="login" href="{% url 'login' %}">Login</a>
+                    <a class="cadastro" href="{% url 'cadastro' %}">Cadastro</a>
+                </div>
+            {% endif %}
+            
+        </nav>
+        
+    </header>
+
+    {% block 'conteudo' %}
+    {% endblock%}
+ 
+</body>
+</html>

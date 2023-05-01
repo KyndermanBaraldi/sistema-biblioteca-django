@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'head' %}
+    <link rel="stylesheet" href="{% static 'livro/css/detalhes_livro.css' %}">
+{% endblock %}
+
+{% block 'titulo' %}
+    Livros
+{% endblock%}
+
+{% block 'conteudo' %}
+
+<main>
+    
+    <h1>{{ livro.titulo }}</h1>
+    <p>Autor: {{ livro.autor }}</p>
+    <p>Editora: {{ livro.editora }}</p>
+    <p>ISBN: {{ livro.isbn }}</p>
+    <p>Categoria: {{ livro.categoria }}</p>
+    <p>Quantidade: {{ livro.quantidade }}</p>
+
+</main>
+
+{% endblock%}

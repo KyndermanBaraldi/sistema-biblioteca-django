@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'head' %}
+    <link rel="stylesheet" href="{% static 'livro/css/buscar.css' %}">
+{% endblock %}
+
+{% block 'titulo' %}
+    Livros
+{% endblock%}
+
+{% block 'conteudo' %}
+
+    <main>
+        <section class="area">
+            <form action="{% url 'buscar' %}" method="GET">
+                <input type="text" name="buscar" placeholder="Buscar livro">
+                <button class="login" type="submit">Buscar</button>
+            </form>
+        </section>
+
+        <section class="livros">
+
+                {% for livro in livros %}
+                    <card class="livro">
+                        <div class="titulo">
+                            <h3>{{ livro.titulo }}</h3>
+                        </div>
+                        <div class="dados">
+                            <p>Autor: {{ livro.autor }}</p>
+                            <p>Editora: {{ livro.editora }}</p>
+                            <p>ISBN: {{ livro.isbn }}</p>
+                            <p>Categoria: {{ livro.categoria }}</p>
+                        </div>
+                        <div class="btn">
+                            <a class="cadastro" href="{% url 'detalhes_livro' livro_id=livro.id %}">Ver mais</a>
+                        </div>
+                    </card>
+                {% endfor %}
+            
+        </section>
+        
+    
+    </main>
+    
+{% endblock%}

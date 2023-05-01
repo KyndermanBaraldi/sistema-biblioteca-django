@@ -1,0 +1,20 @@
+:root {
+  --DarkBgColor: #1b1f27;
+  --DarkAreaBgColor: #181920;
+  --DarkInputBgColor: #252a34;
+
+  --DarkPrimaryColor: #cbd0f7;
+  --DarkSecondaryColor: #94051f;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+}
+
+body {
+  background-color: var(--DarkBgColor);
+  color: var(--DarkPrimaryColor);
+}

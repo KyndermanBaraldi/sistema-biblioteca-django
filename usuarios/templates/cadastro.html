@@ -1,8 +1,6 @@
-{% extends 'base.html' %}
-{% load static %}
+{% extends 'usuariobase.html' %}
 
 {% block 'head' %}
-    <link rel="stylesheet" href="{% static 'usuarios/css/cadastro.css' %}">
 {% endblock %}
 
 {% block 'titulo' %}
@@ -14,7 +12,7 @@
 
 <section class="container">
 
-    <div class="area">
+    <div class="area cadastro">
     
 
         {% if status == '1'%}
@@ -36,10 +34,13 @@
             <input type="password" placeholder="Senha..." id="senha" name="senha">
 
             <input type="submit" value="Cadastrar">
-            <p>Já possui conta? Faça <a href="{% url 'login' %}" >login</a></p>
 
+            
         </form>
-
+        
+        <p>Já possui conta? Faça <a href="{% url 'login' %}" >login</a></p>
+        
+        <p>Voltar para o <a href="{% url 'inicio' %}" >Início</a></p>
 
     </div>
 

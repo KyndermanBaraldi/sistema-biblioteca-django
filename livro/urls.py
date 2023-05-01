@@ -2,6 +2,9 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.home),
-    path('cadastrar/', views.cadastrar),
+    path('', views.buscar, name='buscar'),
+    path('listar/', views.listar, name='listar'),
+    path('cadastrar/', views.cadastrar, name='cadastrarLivro'),
+    path('livro/<int:livro_id>/', views.detalhes_livro, name='detalhes_livro'),
+    # path('fake/', views.fake, name='fake')
 ]

@@ -57,11 +57,11 @@ def entrar(request):
 
     if usuario:
         request.session['usuario'] = usuario.id
-        return redirect('/livro/?status=0&mensagem=Usuário logado com sucesso')
+        return redirect('/?status=0&mensagem=Usuário logado com sucesso')
 
     return redirect('/auth/login/?status=1&mensagem=Email ou senha inválidos')
 
 
 def sair(request):
     del request.session['usuario']
-    return redirect('/auth/login/?status=0&mensagem=Usuário deslogado com sucesso')
+    return redirect('/?status=0&mensagem=Usuário deslogado com sucesso')
