@@ -1,3 +1,4 @@
+from django import forms
 from django.db import models
 
 # Create your models here.
@@ -10,7 +11,7 @@ class Livros(models.Model):
     isbn = models.CharField(max_length=100)
     categoria = models.CharField(max_length=100)
     quantidade = models.IntegerField()
-    disponivel = models.BooleanField(default=True)
+    disponivel = models.IntegerField()
 
     class Meta:
         verbose_name_plural = 'Livros'
@@ -18,6 +19,13 @@ class Livros(models.Model):
 
     def __str__(self):
         return self.titulo
+
+
+class LivroForm(forms.ModelForm):
+    class Meta:
+        model = Livros
+        fields = ['titulo', 'autor', 'editora', 'isbn',
+                  'categoria', 'quantidade', 'disponivel']
 
 
 class Emprestimo(models.Model):

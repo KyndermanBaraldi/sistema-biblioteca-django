@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse
-from livro.models import Livros
+from livro.models import LivroForm, Livros
 
 from usuarios.models import Usuario
 # Create your views here.
@@ -33,12 +33,21 @@ def buscar(request):
     return render(request, 'buscar.html', {'usuario': usuario, 'livros': livros})
 
 
-def cadastrar(request):
-    return HttpResponse('cadastrar livro')
+def cadastrar(request, livro_id=None):
+    livro = None
 
+    if livro_id:
+        livro = get_object_or_404(Livros, pk=livro_id)
 
-def listar(request):
-    return HttpResponse('listar livro')
+    if request.method == 'POST':
+        form = LivroForm(request.POST, instance=livro)
+        if form.is_valid():
+            form.save()
+            return render(request, 'livro_sucesso.html')
+    else:
+        form = LivroForm(instance=livro)
+
+    return render(request, 'livro_form.html', {'form': form})
 
 
 def detalhes_livro(request, livro_id):
@@ -50,6 +59,22 @@ def detalhes_livro(request, livro_id):
         usuario = None
 
     return render(request, 'detalhes_livro.html', {'usuario': usuario, 'livro': livro})
+
+
+def emprestimo(request):
+    return HttpResponse('emprestimo livro')
+
+
+def emprestar(request):
+    return HttpResponse('emprestar livro')
+
+
+def listar(request):
+    return HttpResponse('listar livro')
+
+
+def novo(request):
+    return cadastrar(request)
 
 
 def fake(request):

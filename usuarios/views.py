@@ -63,5 +63,5 @@ def entrar(request):
 
 
 def sair(request):
-    del request.session['usuario']
+    request.session.flush()
     return redirect('/?status=0&mensagem=Usuário deslogado com sucesso')

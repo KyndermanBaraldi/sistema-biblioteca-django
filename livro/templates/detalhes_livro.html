@@ -12,14 +12,23 @@
 {% block 'conteudo' %}
 
 <main>
-    
+
     <h1>{{ livro.titulo }}</h1>
     <p>Autor: {{ livro.autor }}</p>
     <p>Editora: {{ livro.editora }}</p>
     <p>ISBN: {{ livro.isbn }}</p>
     <p>Categoria: {{ livro.categoria }}</p>
-    <p>Quantidade: {{ livro.quantidade }}</p>
+    <p>Unidades disponíveis: {{ livro.disponivel }}</p>
 
+    
+    {% if usuario.admin %}
+        <a href="{% url 'cadastrarLivro' livro.id %}">Editar</a>
+    {% endif %}
+    <a href="{% url 'buscar' %}">Voltar</a>
+    {% if usuario.admin and livro.disponivel > 0 %}
+        <a href="{% url 'emprestar' livro=livro.id %}">Emprestar</a>
+    {% endif %}
+   
 </main>
 
 {% endblock%}
