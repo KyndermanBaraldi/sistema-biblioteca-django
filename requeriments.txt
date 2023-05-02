@@ -1,6 +1,6 @@
 asgiref==3.6.0
 autopep8==2.0.2
--e git+https://github.com/KyndermanBaraldi/sistema-biblioteca-django.git@b46dacba9b5e8ab580e47bf20a79e605464ac232#egg=biblioteca_django
+-e git+https://github.com/KyndermanBaraldi/sistema-biblioteca-django.git@091451e8a2f312aac0d5a1de6080f3c5ebb599de#egg=biblioteca_django
 dj-database-url==2.0.0
 Django==4.1.7
 django-environ==0.10.0
@@ -10,3 +10,4 @@ psycopg2-binary==2.9.6
 pycodestyle==2.10.0
 sqlparse==0.4.3
 typing_extensions==4.5.0
+whitenoise==6.4.0
