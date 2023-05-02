@@ -29,9 +29,9 @@
                     <ul class="nav-item">
                         <li><a href="{% url 'inicio' %}">Início</a></li>
                         <li><a href="{% url 'buscar' %}">Livros</a></li>
-                        <li><a href="">Histórico</a></li>
+                        <li><a href="{% url 'historico' %}">Emprestimos</a></li>
                         {% if usuario.admin %}
-                            <li><a href="">Estoque</a></li>
+                            <li><a href="{% url 'estoque' %}">Estoque</a></li>
                         {% endif %}
                         
                     </ul>

@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'head' %}
+    <link rel="stylesheet" href="{% static 'livro/css/detalhes_livro.css' %}">
+{% endblock %}
+
+{% block 'titulo' %}
+    Estoques
+{% endblock %}
+
+{% block 'conteudo' %}
+
+<main class="area">
+
+    <h1>Histórico de emprestimos</h1>
+
+    {% if atrasados %}
+        <h2>Empréstimos com atraso</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Livro</th>
+                    <th>Usuário</th>
+                    <th>Data de Empréstimo</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for emprestimo in atrasados %}
+                    <tr class="destacado">
+                        <td>{{ emprestimo.livro }}</td>
+                        <td>{{ emprestimo.usuario }}</td>
+                        <td>{{ emprestimo.data_emprestimo }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+
+
+    {% if nao_devolvidos %}
+        <h2>Empréstimos ainda não devolvidos</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Livro</th>
+                    <th>Usuário</th>
+                    <th>Data de Empréstimo</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for emprestimo in nao_devolvidos %}
+                    <tr>
+                        <td>{{ emprestimo.livro }}</td>
+                        <td>{{ emprestimo.usuario }}</td>
+                        <td>{{ emprestimo.data_emprestimo }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+
+    {% if devolvidos %}
+
+        <h2>Emprestimos anteriores</h2>
+        <table>
+        <thead>
+            <tr>
+                <th>Livro</th>
+                <th>Usuário</th>
+                <th>Data de Empréstimo</th>
+                <th>Data de Devolução</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for emprestimo in devolvidos %}
+                <tr>
+                    <td>{{ emprestimo.livro }}</td>
+                    <td>{{ emprestimo.usuario }}</td>
+                    <td>{{ emprestimo.data_emprestimo }}</td>
+                    <td>{{ emprestimo.data_devolucao }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+  {% endif %}
+      
+   
+   
+</main>
+
+{% endblock%}

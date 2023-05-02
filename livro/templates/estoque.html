@@ -6,43 +6,44 @@
 {% endblock %}
 
 {% block 'titulo' %}
-    Livros
+    Estoques
 {% endblock %}
 
 {% block 'conteudo' %}
 
 <main class="area">
 
-    <h1>{{ livro.titulo }}</h1>
-    <p>Autor: {{ livro.autor }}</p>
-    <p>Editora: {{ livro.editora }}</p>
-    <p>ISBN: {{ livro.isbn }}</p>
-    <p>Categoria: {{ livro.categoria }}</p>
-    <p>Unidades disponíveis: {{ livro.disponivel }}</p>
-
-        <div class="groupbtn">
-            {% if livro_anterior %}
-                <a class="login" href="{% url 'detalhes_livro' livro_anterior.id %}">Anterior</a>
-            {% endif %}
-            {% if proximo_livro %}
-                <a class="login" href="{% url 'detalhes_livro' proximo_livro.id %}">Próximo</a>
-            {% endif %}
-        </div>
-
-        {% if usuario.admin %}
-            <div class="groupbtn">
-                <a class="login" href="{% url 'cadastrarLivro' livro.id %}">Editar</a>
-                <a class="cadastro" href="{% url 'apagar' livro.id %}">Apagar</a>
-            </div>
-        {% endif %}
-
-        <div class="groupbtn">
-            {% if usuario.admin and livro.disponivel > 0 %}
-                    <a class="login" href="{% url 'emprestar' livro.id %}">Emprestar</a>
-            {% endif %}
-            <a class="cadastro" href="{% url 'buscar' %}">Voltar</a>
-        </div>
-
+    <h1>Estoques</h1>
+    <table>
+        <thead>
+          <tr>
+            <th>Título</th>
+            <th>Autor</th>
+            <th>Editora</th>
+            <th>ISBN</th>
+            <th>Categoria</th>
+            <th>Quantidade</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for livro in livros %}
+          <tr>
+            <td>{{ livro.titulo }}</td>
+            <td>{{ livro.autor }}</td>
+            <td>{{ livro.editora }}</td>
+            <td>{{ livro.isbn }}</td>
+            <td>{{ livro.categoria }}</td>
+            <td>{{ livro.quantidade }}</td>
+            <td>
+              <a class="login" href="{% url 'cadastrarLivro' livro.id %}">Editar</a>
+              <a class="cadastro" href="{% url 'apagar' livro.id %}">Excluir</a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      
    
    
 </main>

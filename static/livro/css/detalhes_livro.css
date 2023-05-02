@@ -16,3 +16,7 @@
   margin: 5px;
   justify-content: start;
 }
+
+.destacado {
+  background-color: var(--DarkSecondaryColor);
+}

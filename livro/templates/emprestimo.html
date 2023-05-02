@@ -17,7 +17,14 @@
         <p>Editora: {{ livro.editora }}</p>
         <form method="post">
             {% csrf_token %}
-            <p><label for="usuario_id">ID do Usuário:</label> <input type="text" id="usuario_id" name="usuario_id"></p>
+            <p>
+                <label for="usuario">Selecione um usuário:</label>
+                <select name="usuario_id" id="usuario_id">
+                    {% for usuario in usuarios %}
+                        <option value="{{ usuario.id }}">{{ usuario.nome }} ({{ usuario.email }})</option>
+                    {% endfor %}
+                </select>
+            </p>
             <button class="cadastro" type="submit">Emprestar</button>
             <a class="login" href="{% url 'detalhes_livro' livro_id=livro.id %}">cancelar</a>
         </form>

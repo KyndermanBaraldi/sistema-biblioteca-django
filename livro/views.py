@@ -1,6 +1,5 @@
-import datetime
+from datetime import datetime, timedelta
 from django.shortcuts import get_object_or_404, render
-from django.http import HttpResponse
 from livro.models import Emprestimo, LivroForm, Livros
 
 from usuarios.models import Usuario
@@ -97,14 +96,17 @@ def emprestar(request, livro_id):
 
     try:
         livro = get_object_or_404(Livros, pk=livro_id)
-        usuario = Usuario.objects.get(id=request.session.get('usuario'))
+
+        usuarios = Usuario.objects.all()
+        usuario = usuarios.get(id=request.session.get('usuario'))
+
     except:
         usuario = None
 
     if request.method == 'POST':
         usuario_id = request.POST.get('usuario_id')
         data_emprestimo = datetime.now().date()
-        data_devolucao = data_emprestimo + datetime.timedelta(days=7)
+        data_devolucao = data_emprestimo + timedelta(days=7)
 
         emprestimo = Emprestimo(livro=livro, usuario_id=usuario_id,
                                 data_emprestimo=data_emprestimo, data_devolucao=data_devolucao)
@@ -115,7 +117,7 @@ def emprestar(request, livro_id):
 
         return render(request, 'emprestimo_sucesso.html', {'usuario': usuario})
 
-    return render(request, 'emprestimo.html', {'usuario': usuario, 'livro': livro})
+    return render(request, 'emprestimo.html', {'usuario': usuario, 'livro': livro, 'usuarios': usuarios})
 
 
 def estoque(request):
@@ -131,19 +133,35 @@ def estoque(request):
 
 
 def historico(request):
+
     try:
         usuario = Usuario.objects.get(id=request.session.get('usuario'))
+    except:
+        usuario = None
 
-        if usuario.is_admin:
+    try:
+        if usuario.admin:
             emprestimos = Emprestimo.objects.all()
         else:
             emprestimos = Emprestimo.objects.filter(usuario=usuario)
 
+        devolvidos = emprestimos.filter(devolvido=True)
+        nao_devolvidos = emprestimos.filter(
+            devolvido=False, data_devolucao__gte=datetime.now().date())
+        atrasados = emprestimos.filter(
+            data_devolucao__lt=datetime.now().date(), devolvido=False)
+
     except:
-        usuario = None
         emprestimos = None
 
-    return render(request, 'historico.html', {'usuario': usuario, 'emprestimos': emprestimos})
+    context = {
+        'usuario': usuario,
+        'devolvidos': devolvidos,
+        'nao_devolvidos': nao_devolvidos,
+        'atrasados': atrasados,
+    }
+
+    return render(request, 'historico.html', context=context)
 
 
 def novo(request):
