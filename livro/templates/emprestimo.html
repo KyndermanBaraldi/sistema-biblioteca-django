@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'head' %}
+    <link rel="stylesheet" href="{% static 'livro/css/detalhes_livro.css' %}">
+{% endblock %}
+
+{% block 'titulo' %}
+    Empréstimo de Livro
+{% endblock%}
+
+{% block 'conteudo' %}
+    <main class="area">
+        <h1>Empréstimo de Livro</h1>
+        <p>Título: {{ livro.titulo }}</p>
+        <p>Autor: {{ livro.autor }}</p>
+        <p>Editora: {{ livro.editora }}</p>
+        <form method="post">
+            {% csrf_token %}
+            <p><label for="usuario_id">ID do Usuário:</label> <input type="text" id="usuario_id" name="usuario_id"></p>
+            <button class="cadastro" type="submit">Emprestar</button>
+            <a class="login" href="{% url 'detalhes_livro' livro_id=livro.id %}">cancelar</a>
+        </form>
+    </main>
+
+{% endblock%}
+
+
+

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'head' %}
+    <link rel="stylesheet" href="{% static 'livro/css/detalhes_livro.css' %}">
+{% endblock %}
+
+{% block 'titulo' %}
+    Excluir Livro
+{% endblock%}
+
+{% block 'conteudo' %}
+    <main class="area">
+        <h1>Tem certeza que deseja excluir o livro:</h1>
+        <p>Título: {{ livro.titulo }}</p>
+        <p>Autor: {{ livro.autor }}</p>
+        <p>Editora: {{ livro.editora }}</p>
+        <form method="post">
+            {% csrf_token %}
+            <button class="cadastro" type="submit">Sim</button>
+            <a class="login" href="{% url 'detalhes_livro' livro_id=livro.id %}">Não</a>
+        </form>
+    </main>
+
+{% endblock%}
+
+
+

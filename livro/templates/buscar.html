@@ -16,6 +16,9 @@
             <form action="{% url 'buscar' %}" method="GET">
                 <input type="text" name="buscar" placeholder="Buscar livro">
                 <button class="login" type="submit">Buscar</button>
+                {% if usuario.admin %}
+                    <a class="cadastro" href="{% url 'novo' %}">Novo</a>
+                {% endif %}
             </form>
         </section>
 

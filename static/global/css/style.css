@@ -18,3 +18,22 @@ body {
   background-color: var(--DarkBgColor);
   color: var(--DarkPrimaryColor);
 }
+
+.area {
+  margin: 32px;
+}
+
+.area input {
+  background-color: var(--DarkInputBgColor);
+  color: var(--DarkPrimaryColor);
+  font-size: 14px;
+  padding-left: 10px;
+  border: none;
+  height: 45px;
+  outline: none;
+  border-radius: 8px;
+}
+
+.area input::placeholder {
+  color: var(--DarkPrimaryColor);
+}

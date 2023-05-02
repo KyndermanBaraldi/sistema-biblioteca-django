@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'global/css/style.css' %}">
-    <link rel="stylesheet" href="{% static 'livro/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'livro/css/base.css' %}">
     
     {% block 'head' %}
     {% endblock %}
@@ -25,23 +25,26 @@
             <div class="logo">Biblioteca com DJANGO</div>
     
             <div class="links">
-    
-                <ul class="nav-item">
-                    <li><a href="{% url 'inicio' %}">Início</a></li>
-                    <li><a href="{% url 'buscar' %}">Livros</a></li>
-                    <li><a href="">Histórico</a></li>
-                    <li><a href="">Estoque</a></li>
-                </ul>
-                    
+                {% if usuario %}
+                    <ul class="nav-item">
+                        <li><a href="{% url 'inicio' %}">Início</a></li>
+                        <li><a href="{% url 'buscar' %}">Livros</a></li>
+                        <li><a href="">Histórico</a></li>
+                        {% if usuario.admin %}
+                            <li><a href="">Estoque</a></li>
+                        {% endif %}
+                        
+                    </ul>
+                {% endif %}
             </div>
             
             {% if usuario %}
-                <div>
+                <div class="groupbtn">
                     <span>Olá, {{ usuario.nome }}</span>
                     <a class="login" href="{% url 'sair' %}">Sair</a>
                 </div>
             {% else %}
-                <div>
+                <div class="groupbtn">
                     <a class="login" href="{% url 'login' %}">Login</a>
                     <a class="cadastro" href="{% url 'cadastro' %}">Cadastro</a>
                 </div>

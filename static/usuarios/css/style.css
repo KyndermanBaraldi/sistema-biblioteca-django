@@ -30,18 +30,6 @@
 
 .area input {
   margin-top: 20px;
-  background-color: var(--DarkInputBgColor);
-  color: var(--DarkPrimaryColor);
-  font-size: 14px;
-  padding-left: 10px;
-  border: none;
-  height: 45px;
-  outline: none;
-  border-radius: 8px;
-}
-
-.area input::placeholder {
-  color: var(--DarkPrimaryColor);
 }
 
 .area form [type="submit"] {

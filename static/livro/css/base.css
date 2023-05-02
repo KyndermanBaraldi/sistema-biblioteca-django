@@ -31,6 +31,7 @@ nav {
 
 .login,
 .cadastro {
+  display: inline-block;
   padding: 15px 40px;
   font-size: 16px;
   font-weight: 600;
